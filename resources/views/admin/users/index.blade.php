@@ -20,7 +20,7 @@
       <tr>
         <td>{{ $user->id }}</td>
 
-        <td><img height="70" src="{{ $user->photo ? $user->photo->file : 'No User Photo' }}"></td>
+        <td><img height="70" src="{{ $user->photo ? $user->photo->file : 'http://placehold.it/400x400' }}"></td>
         <td><a href="{{ url('/admin/users/'.$user->id.'/edit') }}">{{ $user->name }}</a></td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->role->name }}</td>
