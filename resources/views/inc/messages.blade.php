@@ -6,3 +6,12 @@
   </div>
 @endforeach
 @endif
+
+@if(session('success'))
+
+  <div class="alert alert-danger">
+
+    {{ session('success') }}
+  </div>
+
+@endif
