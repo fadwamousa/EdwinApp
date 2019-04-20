@@ -92,13 +92,6 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        /*if(Storage::delete('/images'.$user->photo->file)){
-
-          $user->delete();
-          return redirect('/admin/users')->with('success','The User Removed');
-
-        }*/
-
         unlink(public_path().$user->photo->file);
         $user->delete();
         return redirect('/admin/users')->with('success','The User Removed');

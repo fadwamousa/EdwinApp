@@ -86,10 +86,10 @@ class AdminPostsController extends Controller
 
         }
 
-        $post = Post::findOrFail($id);
+        //$post = Post::findOrFail($id);
         //$user = auth()->user()->id;
-        $post->update($input);
-        //Auth::user()->posts()->whereId($id)->first()->update($input);
+        //$post->update($input);
+        Auth::user()->posts()->whereId($id)->first()->update($input);
         return redirect('/admin/posts')->with('success','The Post Is Updated');
     }
 
