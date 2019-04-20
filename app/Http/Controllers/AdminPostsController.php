@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\EditRequestPost;
 use App\Post;
 use App\Photo;
 use App\Category;
@@ -75,17 +76,32 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+          $fileName = time().$file->getClientOriginalName();
+          $file->move('images',$fileName);
+          $photo = Photo::create(['file'=>$fileName]);
+          $input['photo_id'] = $photo->id;
+
+        }
+
+        $post = Post::findOrFail($id);
+        //$user = auth()->user()->id;
+        $post->update($input);
+        //Auth::user()->posts()->whereId($id)->first()->update($input);
+        return redirect('/admin/posts')->with('success','The Post Is Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+       $post = Post::findOrFail($id);
+       ////$user = Auth::user();
+       unlink(public_path().$post->photo->file);
+       $post->delete();
+       //$user->posts()->whereId($id)->delete();
+
+       return redirect('/admin/posts')->with('success','The Post is deleted');
     }
 }

@@ -13,8 +13,8 @@
 
 <div class="col-sm-9">
 
-    {!!Form::model($post,['method'=>'PATCH','action'=>['AdminPostsController@update',$post->id],'files'=>true])!!}
-
+    {!!Form::model($post,['method'=>'POST','action'=>['AdminPostsController@update',$post->id],'files'=>true])!!}
+    {{ method_field('PUT') }}
     <div class="form-group">
 
        {{ Form::label('title','Title::') }}
@@ -47,10 +47,14 @@
 
     <div class="form-group">
 
-       {{ Form::submit('Update',['class'=>'btn btn-primary']) }}
+       {{ Form::submit('Update',['class'=>'btn btn-info']) }}
 
 
     </div>
+    {!!Form::close()!!}
+
+    {!!Form::model($post,['method'=>'DELETE','action'=>['AdminPostsController@destroy',$post->id],'files'=>true])!!}
+          {{ Form::submit('delete',['class'=>'btn btn-danger']) }}
     {!!Form::close()!!}
 
 @endsection
