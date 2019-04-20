@@ -21,8 +21,9 @@
         <td>{{ $post->id }}</td>
         <td>{{ $post->user->name }}</td>
         <td><img height="50" src="{{ $post->photo ? $post->photo->file : 'No Photo' }}" /></td>
+        <td>{{ $post->category ? $post->category->name : 'Uncategorize' }}</td>
         <td>{{ $post->category_id }}</td>
-        <td>{{ $post->title }}</td>
+        <td><a href="{{ url('admin/posts/'.$post->id.'/edit') }}">{{ $post->title }}</a></td>
         <td>{{ $post->body }}</td>
         <td>{{ $post->created_at->diffForHumans() }}</td>
         <td>{{ $post->updated_at->diffForHumans() }}</td>
