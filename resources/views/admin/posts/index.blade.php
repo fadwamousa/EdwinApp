@@ -10,6 +10,8 @@
         <th>Category</th>
         <th>Title</th>
         <th>Body</th>
+        <th>Post Link</th>
+        <th>Comment link</th>
         <th>Created</th>
         <th>Updated</th>
       </tr>
@@ -22,11 +24,18 @@
         <td>{{ $post->user->name }}</td>
         <td><img height="50" src="{{ $post->photo ? $post->photo->file : 'No Photo' }}" /></td>
         <td>{{ $post->category ? $post->category->name : 'Uncategorize' }}</td>
-        
+
         <td><a href="{{ url('admin/posts/'.$post->id.'/edit') }}">{{ $post->title }}</a></td>
         <td>{{ str_limit($post->body,7) }}</td>
+        <td><a href="{{ url('/post/'.$post->id) }}">View-Post</a></td>
+        <td>
+          <a href="{{ route('admin.comments.show',$post->id) }}">
+            View-Comment
+          </a>
+        </td>
         <td>{{ $post->created_at->diffForHumans() }}</td>
         <td>{{ $post->updated_at->diffForHumans() }}</td>
+
       </tr>
     </tbody>
 @endforeach

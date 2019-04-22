@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPhotoIdToComments extends Migration
+class AddPhotoToComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddPhotoIdToComments extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->integer('photo_id');
+            $table->string('photo');
         });
     }
 
@@ -25,7 +25,7 @@ class AddPhotoIdToComments extends Migration
     public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('photo_id');
+            $table->dropColumn('photo');
         });
     }
 }

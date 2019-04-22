@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Post;
 use App\Comment;
 use Auth;
+use App\CommentRelpy;
 class AdminCommentsController extends Controller
 {
     /**
@@ -41,11 +42,12 @@ class AdminCommentsController extends Controller
     {
 
         $user  = Auth::user();
+        //return $user->photo->file;
         $datas = [
           'post_id'    => $request->post_id,
           'author'     => $user->name,
           'email'      => $user->email,
-          'photo_id'   => $user->photo->file,
+          'photo'      => $user->photo->file,
           'body'       => $request->body,
         ];
         Comment::create($datas);
@@ -53,15 +55,12 @@ class AdminCommentsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        $post    = Post::findOrFail($id);
+        $comments = $post->comments;
+        return view('admin.comments.show',compact('comments'));
     }
 
 

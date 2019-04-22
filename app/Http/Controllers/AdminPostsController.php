@@ -12,6 +12,7 @@ use App\Photo;
 use App\Category;
 use Auth;
 
+
 class AdminPostsController extends Controller
 {
 
@@ -109,8 +110,10 @@ class AdminPostsController extends Controller
 
     public function post($id){
 
-      $post = Post::find($id);
-      return view('post',compact('post'));
+      $post     = Post::find($id);
+      $comments = $post->comments()->whereIsActive(1)->get();
+
+      return view('post',compact('post','comments'));
     }
 
 

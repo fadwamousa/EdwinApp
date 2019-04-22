@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
 
-  protected $fillable = ['post_id','author','email','body','is_active','photo_id'];
+  protected $fillable = ['post_id','author','email','body','is_active','photo'];
 
   public function replies(){
-    return $this->hasMany(CommentRelpy::class);
+    return $this->hasMany(CommentReply::class);
   }
 
   public function post(){
