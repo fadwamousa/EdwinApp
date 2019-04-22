@@ -17,7 +17,8 @@ class AdminCommentsController extends Controller
      */
     public function index()
     {
-        return view('admin.comments.index');
+        $comments = Comment::all();
+        return view('admin.comments.index',compact('comments'));
     }
 
     /**
@@ -41,10 +42,11 @@ class AdminCommentsController extends Controller
 
         $user  = Auth::user();
         $datas = [
-          'post_id' => $request->post_id,
-          'author'  => $user->name,
-          'email'   => $user->email,
-          'body'    => $request->body,
+          'post_id'    => $request->post_id,
+          'author'     => $user->name,
+          'email'      => $user->email,
+          'photo_id'   => $user->photo->file,
+          'body'       => $request->body,
         ];
         Comment::create($datas);
         $request->session()->flash('Message','The Comment has been submited');
@@ -62,37 +64,26 @@ class AdminCommentsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->is_active = $request->is_Active;
+        $comment->save();
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+      $comment = Comment::findOrFail($id);
+      $comment->delete();
+      return redirect()->back();
     }
 }

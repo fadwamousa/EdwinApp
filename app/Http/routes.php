@@ -3,7 +3,7 @@
 Route::get('/',function(){
   return view('welcome');
 });
-Route::get('post/{post}','AdminPostsController@post');
+Route::get('post/{post}',['as'=>'home.post','uses'=>'AdminPostsController@post']);
 
 
 

@@ -27,6 +27,11 @@
 
 <hr>
 
+@if(Session::has('Message'))
+<div class="alert alert-danger">
+  {{ Session('Message') }}
+</div>
+@endif
 <!-- Blog Comments -->
 
 <!-- Comments Form -->
