@@ -31,20 +31,16 @@ class AdminUsersController extends Controller
     public function store(UsersRequest $request)
     {
 
-        if(trim($request->password) == ''){
-          $input = $request->except('password');
-        }else{
-          $input = $request->all();
-          $input['password'] = bcrypt($request->input('password'));
-        }
-        $input        =  $request->all();
-        if($file      =  $request->file('photo_id')){
-          $FileName   = time().'_'.$file->getClientOriginalName();
-          $file->move('images',$FileName);
-          $photo = Photo::create(['file'=>$FileName]);
-          $input['photo_id'] = $photo->id;
-        }
 
+          $input = $request->all();
+          $input        =  $request->all();
+          if($file      =  $request->file('photo_id')){
+            $FileName   = time().'_'.$file->getClientOriginalName();
+            $file->move('images',$FileName);
+            $photo = Photo::create(['file'=>$FileName]);
+            $input['photo_id'] = $photo->id;
+          }
+        $input['password'] = bcrypt($request->input('password'));
         $user = User::create($input);
         return redirect()->intended('admin/users');
     }
@@ -68,12 +64,7 @@ class AdminUsersController extends Controller
     public function update(UsersEditRequest $request, $id)
     {
 
-        if(trim($request->password) == ''){
-          $input = $request->except('password');
-        }else{
-          $input = $request->all();
-          $input['password'] = bcrypt($request->input('password'));
-        }
+      
          $user     = User::findOrFail($id);
          $input    = $request->all();
          if($file  = $request->file('photo_id')){
@@ -82,7 +73,7 @@ class AdminUsersController extends Controller
            $photo = Photo::create(['file'=>$fileName]);
            $input['photo_id'] = $photo->id;
        }
-
+       $input['password'] = bcrypt($request->input('password'));
        $user->update($input);
        return redirect()->intended('/admin/users');
 

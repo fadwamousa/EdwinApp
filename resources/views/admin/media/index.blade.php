@@ -19,8 +19,14 @@
           <img height="70" src="{{ $photo->file ? $photo->file : 'No Photo' }}"
                alt="{{ $photo->file }}"/>
         </td>
+
         <td>{{ $photo->created_at->diffForHumans() }}</td>
         <td>{{ $photo->updated_at->diffForHumans() }}</td>
+        <td>
+          {!!Form::model($photo,['method'=>'DELETE','action'=>['AdminMediasController@destroy',$photo->id]])!!}
+                  {{ Form::submit('Delete',['class'=>'btn btn-danger']) }}
+          {!!Form::close()!!}
+      </td>
       </tr>
     </tbody>
 @endforeach

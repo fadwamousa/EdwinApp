@@ -55,7 +55,9 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    {{ Auth::user()->name }}
                 </a>
+
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
@@ -116,7 +118,7 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="{{ url('/admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="{{ url('/admin/admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
@@ -143,6 +145,10 @@
 
                             <li>
                                 <a href="{{ route('admin.posts.create') }}">Create Post</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('admin/comments') }}">All Comments </a>
                             </li>
 
                         </ul>

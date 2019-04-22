@@ -15,17 +15,15 @@ use Auth;
 class AdminPostsController extends Controller
 {
 
+
+
     public function index()
     {
         $posts = Post::all();
         return view('admin.posts.index')->with('posts',$posts);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $categories = Category::lists('name','id')->all();
@@ -104,4 +102,17 @@ class AdminPostsController extends Controller
 
        return redirect('/admin/posts')->with('success','The Post is deleted');
     }
+
+
+
+
+
+    public function post($id){
+
+      $post = Post::find($id);
+      return view('post',compact('post'));
+    }
+
+
+
 }

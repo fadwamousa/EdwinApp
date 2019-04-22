@@ -24,30 +24,22 @@ class AdminMediasController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $file      = $request->file('file');
+        $fileName  = time().$file->getClientOriginalName();
+        $file->move('images',$fileName);
+        Photo::create(['file'=>$fileName]);
     }
 
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
 
     public function destroy($id)
     {
-        //
+        $photo = Photo::findOrFail($id);
+
+        unlink(public_path().$photo->file);
+
+        $photo->delete();
+
+        return redirect('admin/media');
     }
 }

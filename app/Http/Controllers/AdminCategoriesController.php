@@ -60,4 +60,6 @@ class AdminCategoriesController extends Controller
       $category->delete();
       return redirect('/admin/categories');
     }
+
+    
 }
