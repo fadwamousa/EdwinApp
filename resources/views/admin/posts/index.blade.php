@@ -41,5 +41,13 @@
 @endforeach
 @endif
   </table>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-5">
+        <!--//{{ $posts->links() }}-->
+        {{ $posts->render() }}
+    </div>
+
+  </div>
+
 
 @endsection
