@@ -26,7 +26,7 @@
         <td>{{ $comment->body }}</td>
         <td>{{ $comment->created_at->diffForHumans() }}</td>
         <td><a href="{{ url('post/'.$comment->post->id) }}">View-Post</a></td>
-        <td><a href="{{ url('admin/comments/'.$comment->id) }}">View-Comment</a></td>
+        <td><a href="{{ url('admin/comment/replies/'.$comment->id) }}">View Comment Reply</a></td>
         <td>
           @if($comment->is_active == 1)
             {!!Form::model($comment,['method'=>'PATCH','action'=>['AdminCommentsController@update',$comment->id]])!!}

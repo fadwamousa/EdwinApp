@@ -78,6 +78,7 @@
         <!-- Nested Comment -->
 
 @foreach($comment->replies as $reply)
+@if($reply->is_active == 1)
         <div id="nested-comment" class="media">
             <a class="pull-left" href="#">
                 <img class="media-object" src="http://placehold.it/64x64" alt="">
@@ -102,10 +103,12 @@
             {!!Form::close()!!}
         </div>
         <!-- End Nested Comment -->
-        @endforeach
+
 
 
     </div>
+    @endif
+      @endforeach
 </div>
 
 @endforeach

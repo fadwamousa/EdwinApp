@@ -27,7 +27,7 @@
 
         <td><a href="{{ url('admin/posts/'.$post->id.'/edit') }}">{{ $post->title }}</a></td>
         <td>{{ str_limit($post->body,7) }}</td>
-        <td><a href="{{ url('/post/'.$post->id) }}">View-Post</a></td>
+        <td><a href="{{ url('/post/'.$post->slug) }}">View-Post</a></td>
         <td>
           <a href="{{ route('admin.comments.show',$post->id) }}">
             View-Comment
